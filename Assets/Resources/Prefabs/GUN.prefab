@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &9062648189877764258
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: e1314a8bc4cf19b46a355b5c523aafe5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e1314a8bc4cf19b46a355b5c523aafe5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.08
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e1314a8bc4cf19b46a355b5c523aafe5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.68
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e1314a8bc4cf19b46a355b5c523aafe5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e1314a8bc4cf19b46a355b5c523aafe5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e1314a8bc4cf19b46a355b5c523aafe5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e1314a8bc4cf19b46a355b5c523aafe5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e1314a8bc4cf19b46a355b5c523aafe5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e1314a8bc4cf19b46a355b5c523aafe5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e1314a8bc4cf19b46a355b5c523aafe5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e1314a8bc4cf19b46a355b5c523aafe5, type: 3}
+      propertyPath: m_Name
+      value: GUN
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e1314a8bc4cf19b46a355b5c523aafe5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -1350139974176721990}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e1314a8bc4cf19b46a355b5c523aafe5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6051213339717099648}
+  m_SourcePrefab: {fileID: 100100000, guid: e1314a8bc4cf19b46a355b5c523aafe5, type: 3}
+--- !u!1 &8144081882398424563 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e1314a8bc4cf19b46a355b5c523aafe5, type: 3}
+  m_PrefabInstance: {fileID: 9062648189877764258}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-1350139974176721990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8144081882398424563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  _assetId: 3274497898
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
+--- !u!114 &6051213339717099648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8144081882398424563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4183ca153a5167549b2f5f39c0108e83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMethod: 0
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  ownerNetId: 0
+  scale: 100
+  mountSettings:
+    localPosition: {x: 0, y: 1.5, z: 4}
+    localEulerAngles: {x: -90, y: 0, z: 180}

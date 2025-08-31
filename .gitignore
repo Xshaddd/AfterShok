@@ -1,0 +1,86 @@
+# ============ Unity Project ============
+
+[Ll]ibrary/
+[Tt]emp/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+UserSettings/
+MemoryCaptures/
+Recordings/
+obj/
+.vs/
+.vscode/
+
+# Ignore Rider / JetBrains IDE project files
+.idea/
+*.sln.iml
+
+# Ignore Unity auto-generated crash reports
+sysinfo.txt
+
+# Ignore Unity cache
+*.unitypackage
+*.pidb
+*.booproj
+
+# Ignore local build artifacts
+*.apk
+*.aab
+*.xcodeproj
+*.xcworkspace
+*.xcuserstate
+*.xcuserdata
+DerivedData/
+*.ipa
+*.app
+
+# Ignore Lightmap and GI cache
+[Bb]akedData/
+LightmapSnapshot/
+Lightmap-*/ 
+LightingData.asset
+GI/
+
+
+# ============ OS Specific ============
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+# ============ Visual Studio / C# ============
+*.csproj
+*.unityproj
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# ============ Logs ============
+*.log
+*.trace
+
+# Crash logs
+*.dmp
+
+# ============ Addressables ============
+/ServerData/
+*.bin
+
+# ============ Packages ============
+/Packages/com.unity.collab-proxy/

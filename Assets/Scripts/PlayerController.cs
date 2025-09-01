@@ -1,11 +1,12 @@
 using Mirror;
+using Mirror.Examples.Common;
 using StinkySteak.MirrorBenchmark;
 using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerController : NetworkBehaviour
+public class PlayerController : NetworkBehaviour, IDamageable
 {
     InputSystem_Actions actions;
     
@@ -51,6 +52,15 @@ public class PlayerController : NetworkBehaviour
     [Header("Interaction")]
     [SerializeField] float maxInteractRange;
 
+    [Header("Player stats")]
+    [SerializeField] float maxHealth = 100f;
+    [SerializeField] Collider headCollider;
+
+    [Header("HUD")]
+    [SerializeField] Canvas hud;
+    [SerializeField] TextMeshProUGUI healthDisplayer;
+    [SyncVar(hook = nameof(OnHealthChanged))] float currentHealth;
+
     public override void OnStartLocalPlayer()
     {
         Application.targetFrameRate = 120;
@@ -60,6 +70,7 @@ public class PlayerController : NetworkBehaviour
         actions.Player.Inventory.performed += ctx => HandleInventory();
         actions.Player.Respawn.performed += ctx => NetworkingManager.Instance.RespawnPlayer(connectionToClient);
         actions.Player.Interact.performed += ctx => Interact();
+        actions.Player.Attack.performed += ctx => Attack();
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -69,6 +80,8 @@ public class PlayerController : NetworkBehaviour
 
         playerCamera.enabled = true;
         playerAudioListener.enabled = true;
+
+        healthDisplayer.text = $"{currentHealth}/{maxHealth}";
     }
 
     public override void OnStartClient()
@@ -78,7 +91,14 @@ public class PlayerController : NetworkBehaviour
             playerCamera.enabled = false;
             playerAudioListener.enabled = false;
             inventoryCanvas.enabled = false;
+            hud.enabled = false;
         }
+    }
+
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
+        currentHealth = maxHealth;
     }
 
     void Update()
@@ -89,6 +109,8 @@ public class PlayerController : NetworkBehaviour
         if (!InputManager.Instance.MenuOpen && !isInventoryOpen)
         {
             HandleLook();
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
     }
     void HandleLook()
@@ -165,9 +187,6 @@ public class PlayerController : NetworkBehaviour
         else
         {
             isInventoryOpen = false;
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-
             foreach (Transform child in inventoryContainer.transform)
             {
                 Destroy(child.gameObject);
@@ -219,7 +238,6 @@ public class PlayerController : NetworkBehaviour
             }
 
         }
-        Debug.Log($"Equipped {item.name}");
     }
 
     [Command]
@@ -247,6 +265,44 @@ public class PlayerController : NetworkBehaviour
             equippedItem = weaponInstance;
         }
     }
-    //TODO:
-    //Shooting mechanic
+
+    void Attack()
+    {
+        if (!isLocalPlayer || isInventoryOpen || InputManager.Instance.MenuOpen) return;
+
+        if (equippedSlot is GunItem gun)
+        {
+            Vector3 origin = transform.position + transform.forward * 2 + transform.up;
+            Quaternion direction = Quaternion.Euler(transform.localEulerAngles + playerCamera.transform.localEulerAngles);
+            CmdFire(origin, direction, equippedSlot.id);
+        }
+    }
+
+    [Command]
+    public void CmdFire(Vector3 origin, Quaternion direction, int weaponId)
+    {
+        var bulletPrefab = (ItemDatabase.Instance.GetItemByID(weaponId) as GunItem).bullet;
+        GameObject bulletObj = Instantiate(bulletPrefab, origin, direction);
+
+        Rigidbody rb = bulletObj.GetComponent<Rigidbody>();
+        rb.linearVelocity = bulletObj.transform.forward * bulletObj.GetComponent<Bullet>().speed;
+
+        NetworkServer.Spawn(bulletObj);
+    }
+
+    [Server]
+    public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+        if (currentHealth <= 0)
+        {
+            NetworkingManager.Instance.RespawnPlayer(connectionToClient);
+        }
+    }
+    
+    void OnHealthChanged(float oldValue, float newValue)
+    {
+        if (!isLocalPlayer) return;
+        healthDisplayer.text = $"{newValue}/{maxHealth}";
+    }
 }

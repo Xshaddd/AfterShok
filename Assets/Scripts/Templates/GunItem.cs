@@ -6,6 +6,7 @@ public class GunItem : Item
     public float damage = 40;
     public GameObject prefab;
     public bool equippable = true;
+    public GameObject bullet;
 
     public override void Use(PlayerController player)
     {

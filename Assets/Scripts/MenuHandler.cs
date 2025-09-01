@@ -26,12 +26,6 @@ public class MenuHandler : MonoBehaviour
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }
-        else
-        {
-            menuCanvas.enabled = false;
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-        }
     }
 
     public void Resume()

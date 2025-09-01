@@ -1,5 +1,4 @@
 using Mirror;
-using Mirror.BouncyCastle.Asn1.X509;
 using UnityEngine;
 
 
@@ -14,7 +13,7 @@ public class HeldItem : NetworkBehaviour
         public Vector3 localPosition;
         public Vector3 localEulerAngles;
     }
-    [SerializeField] MountSettings mountSettings;
+    public MountSettings mountSettings;
 
     public override void OnStartClient()
     {
